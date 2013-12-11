@@ -1,3 +1,9 @@
+"""
+    Simple pyMCU example using the ChipCap2 Temperature & Humidity Sensor
+    Gets current Low and High Alarm values from EEPROM and prints them
+    Sets New Low and High Alarm Values
+    Then goes into an endless loop to display the Humidity and Temperature every 5 seconds
+"""
 
 import sys
 
