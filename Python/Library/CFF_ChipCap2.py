@@ -53,6 +53,8 @@ class CFF_ChipCap2:
             self.mb.digitalState(self.readypin, 1)
 
     def startCommandMode(self):
+        """Put ChipCap2 into Command Mode
+        Usage: startCommandMode()"""
         if self.mb != None:
             self.mb.pinLow(self.pwrpin)
             self.mb.pausems(50)
@@ -63,12 +65,16 @@ class CFF_ChipCap2:
             self.readSensor()
 
     def startNormalMode(self):
+        """Put ChipCap2 into Normal Mode if it is in Command Mode
+        Usage: startNormalMode()"""
         if self.mb != None:
             self.mb.i2cWrite((self.i2caddr << 1),[0x80, 0, 0])
             self.mb.pausems(5)
             self.readSensor()
 
     def checkAlarmLow(self):
+        """Check if the Low Alarm has been triggered
+        Usage: checkAlarmLow()"""
         if self.mb != None:
             if self.mb.digitalRead(self.alowpin) == 1:
                 return True
@@ -78,6 +84,8 @@ class CFF_ChipCap2:
             return False
 
     def setAlarmLowVal(self, alarmValue):
+        """Set The Alarm Low Value in Celsius
+        Usage: setAlarmLowVal(10)"""
         if self.mb != None:
             self.readSensor()
             if self.status == CCF_CHIPCAP2_STATUS_COMMANDMODE:
@@ -94,6 +102,8 @@ class CFF_ChipCap2:
                 
 
     def getAlarmLowVal(self):
+        """Get Current Low Alarm Value Setting and return Value in Celsius
+        Usage: getAlarmLowVal()"""
         if self.mb != None:
             self.readSensor()
             if self.status == CCF_CHIPCAP2_STATUS_COMMANDMODE:
@@ -104,6 +114,8 @@ class CFF_ChipCap2:
                 return eALow
 
     def checkAlarmHigh(self):
+        """Check if the High Alarm has been triggered
+        Usage: checkAlarmHigh()"""
         if self.mb != None:
             if self.mb.digitalRead(self.ahighpin) == 1:
                 return True
@@ -113,6 +125,8 @@ class CFF_ChipCap2:
             return False
 
     def setAlarmHighVal(self, alarmValue):
+        """Set The Alarm High Value in Celsius
+        Usage: setAlarmHighVal(30)"""
         if self.mb != None:
             self.readSensor()
             if self.status == CCF_CHIPCAP2_STATUS_COMMANDMODE:
@@ -128,6 +142,8 @@ class CFF_ChipCap2:
                 self.mb.pausems(5)
 
     def getAlarmHighVal(self):
+        """Get Current High Alarm Value Setting and return Value in Celsius
+        Usage: getAlarmHighVal()"""
         if self.mb != None:
             self.readSensor()
             if self.status == CCF_CHIPCAP2_STATUS_COMMANDMODE:
