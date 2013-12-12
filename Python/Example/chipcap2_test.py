@@ -22,6 +22,9 @@ ChipCap2_AlarmHighPin = 5
 cc2 = CFF_ChipCap2.CFF_ChipCap2(mb, ChipCap2_i2cAddr, ChipCap2_PowerPin, ChipCap2_ReadyPin, ChipCap2_AlarmLowPin, ChipCap2_AlarmHighPin) # init ChipCap2 class and set all init variables
 # Alternatively you could just do: cc2 = CFF_ChipCap2.CFF_ChipCap2(mb)  if you are using all the default settings
 
+cc2.power(1)                        # turn ChipCap2 power on
+mb.pausems(500)
+
 cc2.startCommandMode() # put ChipCap2 in Command Mode
 if cc2.status == CFF_ChipCap2.CCF_CHIPCAP2_STATUS_COMMANDMODE:  # check to make sure it went into command mode
     print "ChipCap2 is now in command mode"
@@ -43,8 +46,7 @@ if cc2.status == CFF_ChipCap2.CCF_CHIPCAP2_STATUS_COMMANDMODE:  # check to make 
 else:
     print "ChipCap2 is in Normal Mode"
 
-cc2.power(1)                        # turn ChipCap2 power on
-mb.pausems(500)
+
 
 while 1:
     if cc2.dataReady() == True: # if data is ready for reading
